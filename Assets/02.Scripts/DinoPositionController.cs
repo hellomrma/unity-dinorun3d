@@ -28,22 +28,33 @@ public class DinoPositionController : MonoBehaviour
     /// </summary>
     private void SetDinoPosition()
     {
-        // 원을 자식 수와 ratio에 맞게 나눈 각도 간격 (도 단위)
-        float angleStep = 360f / (raptors.childCount * ratio);
-
-        for (int i = 0; i < raptors.childCount; i++)
+        for (int i =0; i < raptors.childCount; i++)
         {
-            // i번째 자식에 해당하는 각도 (도)
-            float angle = i * angleStep;
-            // 삼각함수 사용을 위해 라디안으로 변환
-            float angleRad = angle * Mathf.Deg2Rad;
-            // 원 위의 X, Z 좌표 (Y는 0으로 고정)
-            float x = Mathf.Cos(angleRad) * radius;
-            float z = Mathf.Sin(angleRad) * radius;
+            if (i > 8)
+            {
+                raptors.GetChild(i).gameObject.SetActive(false);
+                continue;
+            } else
+            {
+                if (raptors.childCount < 10)
+                {
+                    // 원을 자식 수와 ratio에 맞게 나눈 각도 간격 (도 단위)
+                    float angleStep = 360f / (raptors.childCount * ratio);
 
-            // 해당 자식의 로컬 위치를 원 위의 좌표로 설정
-            raptors.GetChild(i).localPosition = new Vector3(x, 0f, z);
+                    // i번째 자식에 해당하는 각도 (도)
+                    float angle = i * angleStep;
+                    // 삼각함수 사용을 위해 라디안으로 변환
+                    float angleRad = angle * Mathf.Deg2Rad;
+                    // 원 위의 X, Z 좌표 (Y는 0으로 고정)
+                    float x = Mathf.Cos(angleRad) * radius;
+                    float z = Mathf.Sin(angleRad) * radius;
+
+                    // 해당 자식의 로컬 위치를 원 위의 좌표로 설정
+                    raptors.GetChild(i).localPosition = new Vector3(x, 0f, z);
+                }
+            }
         }
+
     }
 
     /// <summary>매 프레임 호출 (현재는 사용하지 않음, 예전 배치 방식 주석 보관)</summary>
