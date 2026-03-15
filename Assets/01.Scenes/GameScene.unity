@@ -133,7 +133,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 780615942}
+    m_TransformParent: {fileID: 1613626430}
     m_Modifications:
     - target: {fileID: 4156587392990214058, guid: fd03a296e0bd90343baab9c1aa106c37, type: 3}
       propertyPath: m_Controller
@@ -299,7 +299,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 780615942}
+    m_TransformParent: {fileID: 1613626430}
     m_Modifications:
     - target: {fileID: 4156587392990214058, guid: fd03a296e0bd90343baab9c1aa106c37, type: 3}
       propertyPath: m_Controller
@@ -476,16 +476,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 805723824}
-  - {fileID: 81813631}
-  - {fileID: 1287512877}
-  - {fileID: 951626359}
-  - {fileID: 2049258946}
-  - {fileID: 296476321}
-  - {fileID: 1976150128}
-  - {fileID: 384016381}
-  - {fileID: 1761257509}
+  m_Children: []
   m_Father: {fileID: 1613626430}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &805723824 stripped
@@ -504,7 +495,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 780615942}
+    m_TransformParent: {fileID: 1613626430}
     m_Modifications:
     - target: {fileID: 4156587392990214058, guid: fd03a296e0bd90343baab9c1aa106c37, type: 3}
       propertyPath: m_Controller
@@ -707,7 +698,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 780615942}
+    m_TransformParent: {fileID: 1613626430}
     m_Modifications:
     - target: {fileID: 4156587392990214058, guid: fd03a296e0bd90343baab9c1aa106c37, type: 3}
       propertyPath: m_Controller
@@ -954,7 +945,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1371735919
 Transform:
   m_ObjectHideFlags: 0
@@ -1232,6 +1223,15 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1761257509}
+  - {fileID: 384016381}
+  - {fileID: 1976150128}
+  - {fileID: 296476321}
+  - {fileID: 2049258946}
+  - {fileID: 951626359}
+  - {fileID: 1287512877}
+  - {fileID: 81813631}
+  - {fileID: 805723824}
   - {fileID: 1371735919}
   - {fileID: 780615942}
   m_Father: {fileID: 0}
@@ -1262,16 +1262,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a401ac10ca97d47a936e09e309fe43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  raptors: {fileID: 780615942}
-  radius: 1
-  ratio: 0.5
+  dinoGapX: 1
 --- !u!1001 &1718793109
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 780615942}
+    m_TransformParent: {fileID: 1613626430}
     m_Modifications:
     - target: {fileID: 4156587392990214058, guid: fd03a296e0bd90343baab9c1aa106c37, type: 3}
       propertyPath: m_Controller
@@ -1332,7 +1330,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 780615942}
+    m_TransformParent: {fileID: 1613626430}
     m_Modifications:
     - target: {fileID: 4156587392990214058, guid: fd03a296e0bd90343baab9c1aa106c37, type: 3}
       propertyPath: m_Controller
@@ -1398,7 +1396,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 780615942}
+    m_TransformParent: {fileID: 1613626430}
     m_Modifications:
     - target: {fileID: 4156587392990214058, guid: fd03a296e0bd90343baab9c1aa106c37, type: 3}
       propertyPath: m_Controller
@@ -1464,7 +1462,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 780615942}
+    m_TransformParent: {fileID: 1613626430}
     m_Modifications:
     - target: {fileID: 4156587392990214058, guid: fd03a296e0bd90343baab9c1aa106c37, type: 3}
       propertyPath: m_Controller
@@ -1530,7 +1528,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 780615942}
+    m_TransformParent: {fileID: 1613626430}
     m_Modifications:
     - target: {fileID: 4156587392990214058, guid: fd03a296e0bd90343baab9c1aa106c37, type: 3}
       propertyPath: m_Controller
