@@ -97,6 +97,21 @@ public class DinoPositionController : MonoBehaviour
     /// <param name="number">나눌 수</param>
     private void DivisionRaptor(int number)
     {
+        // 나눗셈은 정수 나눗셈으로 처리하여 소수점 이하는 버립니다.
+        int currentCount = raptors.childCount;
+        int toRemain = currentCount / number;
+
+        if (toRemain < 0)
+        {
+            toRemain = 0; // 음수는 존재할 수 없으므로 0으로 처리
+        }
+
+        int toRemove = currentCount - toRemain;
+
+        for (int i = currentCount - 1; i >= (currentCount - toRemove); i--)
+        {
+            Destroy(raptors.GetChild(i).gameObject);
+        }
     }
 
     /// <summary>
