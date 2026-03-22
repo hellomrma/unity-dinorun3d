@@ -112,6 +112,9 @@ public class DinoPositionController : MonoBehaviour
         {
             Destroy(raptors.GetChild(i).gameObject);
         }
+
+        // 위 코드를 현재 9일때 나누기3이 있다고 가정하고 코드에 직접 넣어봐 주세요
+        // 예: currentCount = 9, number = 3, toRemain = 3, toRemove = 6
     }
 
     /// <summary>
