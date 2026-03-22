@@ -1392,10 +1392,10 @@ MonoBehaviour:
   leftDoorSpriteRD: {fileID: 860745691}
   rightDoorText: {fileID: 703680946}
   leftDoorText: {fileID: 1997609507}
-  rightDoorType: 0
-  rightDoorNumber: 10
-  leftDoorType: 0
-  leftDoorNumber: 5
+  rightDoorType: 1
+  rightDoorNumber: 5
+  leftDoorType: 3
+  leftDoorNumber: 10
   goodColor: {r: 0.2688679, g: 0.38807425, b: 1, a: 0.45882353}
   badColor: {r: 1, g: 0.482324, b: 0.3537736, a: 0.46666667}
 --- !u!65 &1320153742
