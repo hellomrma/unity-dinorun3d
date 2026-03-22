@@ -7,15 +7,15 @@ public class DinoPositionController : MonoBehaviour
 {
     /// <summary>랩터들이 자식으로 붙어 있는 부모 Transform (원형 배치의 중심)</summary>
     public Transform raptors;
-    public GameObject raptorPrefab; // (미사용) 랩터 프리팹, 필요 시 동적으로 생성 가능
+
+    /// <summary>랩터 프리팹 (PlusRaptor/TimesRaptor에서 동적 생성에 사용)</summary>
+    public GameObject raptorPrefab;
 
     /// <summary>원형 배치의 반지름 (월드 단위)</summary>
     public float radius = 1f;
 
     /// <summary>원 위에 배치할 때 각도 간격을 조절하는 비율 (작을수록 더 촘촘하게 배치)</summary>
     public float ratio = 0.1f;
-
-    // public float dinoGapX;  // (미사용) 가로 배치 시 오브젝트 간 X 간격
 
     /// <summary>게임 시작 시 한 번 호출되어 랩터 위치를 원형으로 설정</summary>
     void Start()
@@ -32,27 +32,25 @@ public class DinoPositionController : MonoBehaviour
     {
         if (doorType.Equals(DoorType.Plus))
         {
-            // 더하기: doorNumber만큼 랩터 추가
             PlusRaptor(doorNumber);
         }
         else if (doorType.Equals(DoorType.Minus))
         {
-            // 빼기: doorNumber만큼 랩터 제거
+            MinusRaptor(doorNumber);
         }
         else if (doorType.Equals(DoorType.Times))
         {
-            // 곱하기: 현재 랩터 수에 doorNumber를 곱한 수만큼 추가
+            TimesRaptor(doorNumber);
         }
         else if (doorType.Equals(DoorType.Division))
         {
-            // 나누기: 현재 랩터 수를 doorNumber로 나눈 수만큼 제거
+            DivisionRaptor(doorNumber);
         }
+
+        SetDinoPosition();
     }
 
-    /// <summary>
-    /// raptorPrefab을 number개만큼 생성하여 raptors의 자식으로 추가합니다.
-    /// 추가 후 SetDinoPosition()을 호출해 원형 배치를 갱신해야 합니다.
-    /// </summary>
+    /// <summary>raptorPrefab을 number개만큼 생성하여 raptors의 자식으로 추가합니다.</summary>
     /// <param name="number">추가할 랩터 수</param>
     private void PlusRaptor(int number)
     {
@@ -63,65 +61,70 @@ public class DinoPositionController : MonoBehaviour
     }
 
     /// <summary>
-    /// raptors의 자식 오브젝트를 number개만큼 제거합니다. (미구현)
+    /// raptors의 자식 오브젝트를 뒤에서부터 number개만큼 제거합니다.
+    /// number가 현재 자식 수보다 크면 전부 제거합니다.
     /// </summary>
     /// <param name="number">제거할 랩터 수</param>
     private void MinusRaptor(int number)
+    {
+        if (number > raptors.childCount)
+        {
+            number = raptors.childCount; // 현재 수보다 많이 제거하려 하면 전부 제거
+        }
+
+        int raptorNum = raptors.childCount;
+
+        for (int i = raptorNum-1; i >= (raptorNum - number); i--)
+        {
+            Destroy(raptors.GetChild(i).gameObject);
+        }   
+    }
+
+    /// <summary>현재 랩터 수에 number를 곱한 수가 되도록 랩터를 추가합니다.</summary>
+    /// <param name="number">곱할 배수</param>
+    private void TimesRaptor(int number)
+    {
+        int currentCount = raptors.childCount;
+        int toAdd = currentCount * number - currentCount;
+
+        for (int i = 0; i < toAdd; i++)
+        {
+            Instantiate(raptorPrefab, raptors);
+        }
+    }
+
+    /// <summary>현재 랩터 수를 number로 나눈 수가 되도록 랩터를 제거합니다. (미구현)</summary>
+    /// <param name="number">나눌 수</param>
+    private void DivisionRaptor(int number)
     {
     }
 
     /// <summary>
     /// raptors의 모든 자식 오브젝트를 원 위에 균등하게 배치합니다.
-    /// 각도 간격은 (자식 수 * ratio)로 나누어 계산합니다.
+    /// 9개 초과 시 초과분은 비활성화하며, 각도 간격은 (자식 수 * ratio)로 계산합니다.
     /// </summary>
     private void SetDinoPosition()
     {
-        for (int i =0; i < raptors.childCount; i++)
+        for (int i = 0; i < raptors.childCount; i++)
         {
             if (i > 8)
             {
+                // 최대 9마리 초과분은 비활성화
                 raptors.GetChild(i).gameObject.SetActive(false);
                 continue;
-            } else
+            }
+
+            if (raptors.childCount < 10)
             {
-                if (raptors.childCount < 10)
-                {
-                    // 원을 자식 수와 ratio에 맞게 나눈 각도 간격 (도 단위)
-                    float angleStep = 360f / (raptors.childCount * ratio);
+                float angleStep = 360f / (raptors.childCount * ratio); // 각도 간격 (도 단위)
+                float angleRad = i * angleStep * Mathf.Deg2Rad;        // i번째 각도 (라디안)
+                float x = Mathf.Cos(angleRad) * radius;
+                float z = Mathf.Sin(angleRad) * radius;
 
-                    // i번째 자식에 해당하는 각도 (도)
-                    float angle = i * angleStep;
-                    // 삼각함수 사용을 위해 라디안으로 변환
-                    float angleRad = angle * Mathf.Deg2Rad;
-                    // 원 위의 X, Z 좌표 (Y는 0으로 고정)
-                    float x = Mathf.Cos(angleRad) * radius;
-                    float z = Mathf.Sin(angleRad) * radius;
-
-                    // 해당 자식의 로컬 위치를 원 위의 좌표로 설정
-                    raptors.GetChild(i).localPosition = new Vector3(x, 0f, z);
-                }
+                raptors.GetChild(i).localPosition = new Vector3(x, 0f, z);
             }
         }
-
     }
 
-    /// <summary>매 프레임 호출 (현재는 사용하지 않음, 예전 배치 방식 주석 보관)</summary>
-    void Update()
-    {
-        // ----- 아래는 예전에 사용하던 세로/가로 배치 방식 (참고용) -----
-
-        // 세로로 배치: 이 스크립트가 붙은 오브젝트의 자식 개수만큼 반복
-        // for (int i = 0; i < transform.childCount; i++)
-        // {
-        //     float z = i * 3;  // Z축 간격
-        //     transform.GetChild(i).localPosition = Vector3.back * z;
-        // }
-
-        // 가로로 배치: dinoGapX 간격으로 X축에 일렬 배치
-        // float startPosX = (transform.childCount * (-dinoGapX / 2)) + (dinoGapX / 2);
-        // for (int i = 0; i < transform.childCount; i++)
-        // {
-        //     transform.GetChild(i).localPosition = new Vector3(startPosX + (dinoGapX * i), 0, 0);
-        // }
-    }
+    void Update() { }
 }

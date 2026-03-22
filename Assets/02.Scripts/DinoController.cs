@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UIElements;
 
 /// <summary>
 /// 공룡(Dino) 캐릭터의 이동을 제어하는 컴포넌트.
@@ -63,6 +64,7 @@ public class DinoController : MonoBehaviour
         {
             int doorNum = doors.gameObject.GetComponent<SelectDoors>().GetDoorNumber(transform.position.x);
             DoorType doorType = doors.gameObject.GetComponent<SelectDoors>().GetDoorType(transform.position.x);
+            doors.gameObject.GetComponent<BoxCollider>().enabled = false; // 충돌한 문의 BoxCollider를 비활성화하여 중복 감지 방지
 
             dinoPositionController.SetDoorCalc(doorType, doorNum);
         }
