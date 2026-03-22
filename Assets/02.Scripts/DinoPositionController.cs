@@ -7,6 +7,7 @@ public class DinoPositionController : MonoBehaviour
 {
     /// <summary>랩터들이 자식으로 붙어 있는 부모 Transform (원형 배치의 중심)</summary>
     public Transform raptors;
+    public GameObject raptorPrefab; // (미사용) 랩터 프리팹, 필요 시 동적으로 생성 가능
 
     /// <summary>원형 배치의 반지름 (월드 단위)</summary>
     public float radius = 1f;
@@ -20,6 +21,53 @@ public class DinoPositionController : MonoBehaviour
     void Start()
     {
         SetDinoPosition();
+    }
+
+    /// <summary>
+    /// 플레이어가 통과한 문의 타입과 숫자에 따라 랩터 수를 조절합니다.
+    /// </summary>
+    /// <param name="doorType">통과한 문의 연산 타입 (Plus/Minus/Times/Division)</param>
+    /// <param name="doorNumber">통과한 문에 표시된 숫자</param>
+    public void SetDoorCalc(DoorType doorType, int doorNumber)
+    {
+        if (doorType.Equals(DoorType.Plus))
+        {
+            // 더하기: doorNumber만큼 랩터 추가
+            PlusRaptor(doorNumber);
+        }
+        else if (doorType.Equals(DoorType.Minus))
+        {
+            // 빼기: doorNumber만큼 랩터 제거
+        }
+        else if (doorType.Equals(DoorType.Times))
+        {
+            // 곱하기: 현재 랩터 수에 doorNumber를 곱한 수만큼 추가
+        }
+        else if (doorType.Equals(DoorType.Division))
+        {
+            // 나누기: 현재 랩터 수를 doorNumber로 나눈 수만큼 제거
+        }
+    }
+
+    /// <summary>
+    /// raptorPrefab을 number개만큼 생성하여 raptors의 자식으로 추가합니다.
+    /// 추가 후 SetDinoPosition()을 호출해 원형 배치를 갱신해야 합니다.
+    /// </summary>
+    /// <param name="number">추가할 랩터 수</param>
+    private void PlusRaptor(int number)
+    {
+        for (int i = 0; i < number; i++)
+        {
+            Instantiate(raptorPrefab, raptors);
+        }
+    }
+
+    /// <summary>
+    /// raptors의 자식 오브젝트를 number개만큼 제거합니다. (미구현)
+    /// </summary>
+    /// <param name="number">제거할 랩터 수</param>
+    private void MinusRaptor(int number)
+    {
     }
 
     /// <summary>
