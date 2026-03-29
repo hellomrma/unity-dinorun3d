@@ -1,11 +1,32 @@
 using UnityEngine;
 
+/// <summary>
+/// 맵 세그먼트를 Z축 방향으로 이어 붙여 게임 스테이지를 생성하는 컴포넌트.
+/// 첫 번째 맵은 항상 고정 프리팹(mapPrefabs[0])을 사용하고,
+/// 이후 맵은 목록에서 랜덤하게 선택합니다.
+/// </summary>
 public class MapManager : MonoBehaviour
 {
-    public GameObject[] mapPrefabs;  // 랜덤으로 생성할 맵 프리팹 목록
+    /// <summary>랜덤으로 선택할 맵 프리팹 목록. 인덱스 0은 항상 첫 번째 맵으로 사용됩니다.</summary>
+    public GameObject[] mapPrefabs;
 
-    // 시작 시 맵 5개를 순서대로 이어 붙여 생성한다.
+    /// <summary>태그 "Goal"로 찾은 골 지점 오브젝트. 진행도 계산에 사용됩니다.</summary>
+    public GameObject goalObject;
+
+    /// <summary>게임 시작 시 맵 5개를 순서대로 이어 붙여 생성하고 골 지점을 탐색합니다.</summary>
     void Start()
+    {
+        CreateMap();
+        goalObject = GameObject.FindWithTag("Goal");  // 태그가 "Goal"인 오브젝트를 찾아 goalObject에 할당
+        GetGoalDistance();  // 목표 지점까지의 초기 거리를 계산하여 필요에 따라 활용할 수 있도록 합니다.
+    }
+
+    /// <summary>
+    /// mapPrefabs 목록에서 맵을 선택하여 Z축 방향으로 5개 이어 붙입니다.
+    /// 각 맵의 Z 길이(GetMapSize())를 기준으로 다음 맵의 배치 위치를 계산합니다.
+    /// 생성된 맵들은 씬의 "GeneratedMaps" 오브젝트 하위에 정리됩니다.
+    /// </summary>
+    private void CreateMap()
     {
         Vector3 mapPosition = Vector3.zero;
         Transform generatedMapsParent = GameObject.Find("GeneratedMaps").transform;  // 생성된 맵들을 정리할 부모 오브젝트
@@ -26,6 +47,15 @@ public class MapManager : MonoBehaviour
             GameObject nowMap = Instantiate(selectedMap, mapPosition, Quaternion.identity, generatedMapsParent);  // 선택한 맵 프리팹을 mapPosition 위치에 회전 없이 생성하고 GeneratedMaps의 자식으로 설정
             mapPosition.z += nowMap.GetComponent<Map>().GetMapSize() / 2f;  // 다음 맵 배치를 위해 현재 맵의 나머지 절반 길이만큼 전진
         }
+    }
+
+    /// <summary>
+    /// 골 지점 오브젝트의 Z축 위치를 반환합니다.
+    /// 진행도(Progress Bar) 계산 시 전체 거리 기준값으로 활용됩니다.
+    /// </summary>
+    public float GetGoalDistance()
+    {
+        return goalObject.transform.position.z;  // goalObject의 Z축 위치를 반환하여 목표 지점까지의 거리를 계산할 때 사용
     }
 }
 
