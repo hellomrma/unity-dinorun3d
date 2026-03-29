@@ -7,11 +7,25 @@ using UnityEngine;
 /// </summary>
 public class MapManager : MonoBehaviour
 {
+
+    public static MapManager instance;
+
     /// <summary>랜덤으로 선택할 맵 프리팹 목록. 인덱스 0은 항상 첫 번째 맵으로 사용됩니다.</summary>
     public GameObject[] mapPrefabs;
 
     /// <summary>태그 "Goal"로 찾은 골 지점 오브젝트. 진행도 계산에 사용됩니다.</summary>
     public GameObject goalObject;
+
+    private void Awake()
+    {
+        if (instance != null) {
+            Destroy(gameObject); // 이미 인스턴스가 존재하면 현재 오브젝트를 파괴
+        }
+        else
+        {
+            instance = this; // 싱글톤 인스턴스 할당
+        }
+    }
 
     /// <summary>게임 시작 시 맵 5개를 순서대로 이어 붙여 생성하고 골 지점을 탐색합니다.</summary>
     void Start()

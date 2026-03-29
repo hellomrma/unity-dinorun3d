@@ -9,6 +9,8 @@ using UnityEngine.UIElements;
 public class DinoController : MonoBehaviour
 {
 
+    public static DinoController instance; // 싱글톤 인스턴스
+
     public DinoPositionController dinoPositionController; // 랩터 배치 컨트롤러 참조
 
     public float zMoveSpeed; // Z축(전진) 이동 속도
@@ -17,8 +19,15 @@ public class DinoController : MonoBehaviour
     public Vector3 sphereCenter; // 충돌 감지용 구체의 중심 위치
     public float sphereRadius = 0.5f;   // 충돌 감지용 구체의 반지름
 
-    void Start()
+    private void Awake()
     {
+        if (instance != null) {
+            Destroy(gameObject); // 이미 인스턴스가 존재하면 현재 오브젝트를 파괴
+        }
+        else
+        {
+            instance = this; // 싱글톤 인스턴스 할당
+        }
     }
 
     /// <summary>매 프레임 이동 처리와 문 충돌 감지를 수행합니다.</summary>

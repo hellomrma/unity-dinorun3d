@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     /// <summary>게임 시작 전 표시되는 타이틀 패널 UI</summary>
     public GameObject titlePanel;
 
+    public GameObject gamePanel;
+
     /// <summary>목표 지점까지의 진행도를 표시하는 슬라이더 UI</summary>
     public Slider progressBar;
 
@@ -44,6 +46,9 @@ public class GameManager : MonoBehaviour
     public void Start()
     {
         Time.timeScale = 0f;
+        progressBar.value = 0f; // 진행도 바 초기화
+        titlePanel.SetActive(true);
+        gamePanel.SetActive(false);
     }
 
     /// <summary>
@@ -56,6 +61,7 @@ public class GameManager : MonoBehaviour
         // 예: UI 초기화, 배경 음악 재생 등
         isGameStart = true; // 게임 시작 플래그 설정
         titlePanel.SetActive(false);
+        gamePanel.SetActive(true);
         Time.timeScale = 1f;
     }
 
@@ -65,7 +71,15 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void SetDistanceProgressBar()
     {
-
+        if (!isGameStart){
+            return; // 게임이 시작되지 않았으면 진행도 바 갱신하지 않음
+        }
+        float goalDistance = DinoController.instance.transform.position.z / MapManager.instance.GetGoalDistance();
+        progressBar.value = goalDistance;
+    }
+    void Update()
+    {
+        SetDistanceProgressBar();
     }
 
 }
