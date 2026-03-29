@@ -12,13 +12,15 @@ public class MapManager : MonoBehaviour
 
         for (int i = 0; i < 5; i++)
         {
-            GameObject selectedMap = mapPrefabs[Random.Range(0, mapPrefabs.Length)];  // 맵 프리팹 중 하나를 랜덤 선택
-
-            mapPosition.y = selectedMap.transform.position.y;  // 프리팹이 가진 기본 y 위치를 유지
+            GameObject selectedMap;
 
             if (i>0)
             {
+                selectedMap = mapPrefabs[Random.Range(1, mapPrefabs.Length)];  // 첫 번째 맵 이후부터는 랜덤으로 선택
                 mapPosition.z += selectedMap.GetComponent<Map>().GetMapSize() / 2f;  // 이전 위치에서 현재 맵의 절반 길이만큼 전진
+            } else
+            {
+                selectedMap = mapPrefabs[0];  // 첫 번째 맵은 항상 고정된 프리팹으로 선택
             }
 
             GameObject nowMap = Instantiate(selectedMap, mapPosition, Quaternion.identity, generatedMapsParent);  // 선택한 맵 프리팹을 mapPosition 위치에 회전 없이 생성하고 GeneratedMaps의 자식으로 설정

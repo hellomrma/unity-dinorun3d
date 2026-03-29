@@ -62,11 +62,18 @@ public class DinoController : MonoBehaviour
         Collider[] hitColliders = Physics.OverlapSphere(transform.position + sphereCenter, sphereRadius);
         foreach (Collider doors in hitColliders)
         {
-            int doorNum = doors.gameObject.GetComponent<SelectDoors>().GetDoorNumber(transform.position.x);
-            DoorType doorType = doors.gameObject.GetComponent<SelectDoors>().GetDoorType(transform.position.x);
-            doors.gameObject.GetComponent<BoxCollider>().enabled = false; // 충돌한 문의 BoxCollider를 비활성화하여 중복 감지 방지
-
-            dinoPositionController.SetDoorCalc(doorType, doorNum);
+            if (doors.CompareTag("Goal"))
+            {
+                // 골 지점에 도달한 경우, 게임 종료 또는 다음 단계로 이동하는 로직을 여기에 추가할 수 있습니다.
+                Debug.Log("Goal reached!");
+                doors.gameObject.GetComponent<BoxCollider>().enabled = false; // 골 지점의 BoxCollider를 비활성화하여 중복 감지 방지
+            } else
+            {
+                int doorNum = doors.gameObject.GetComponent<SelectDoors>().GetDoorNumber(transform.position.x);
+                DoorType doorType = doors.gameObject.GetComponent<SelectDoors>().GetDoorType(transform.position.x);
+                doors.gameObject.GetComponent<BoxCollider>().enabled = false; // 충돌한 문의 BoxCollider를 비활성화하여 중복 감지 방지
+                dinoPositionController.SetDoorCalc(doorType, doorNum);
+            }
         }
     }
 
