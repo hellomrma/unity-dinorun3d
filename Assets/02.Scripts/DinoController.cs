@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 /// <summary>
@@ -23,8 +24,11 @@ public class DinoController : MonoBehaviour
     /// <summary>매 프레임 이동 처리와 문 충돌 감지를 수행합니다.</summary>
     void Update()
     {
-        DinoMove();
-        DoorCheck();
+        if (GameManager.instance.isGameStart)
+        {
+            DinoMove();
+            DoorCheck();
+        }
     }
 
     /// <summary>
