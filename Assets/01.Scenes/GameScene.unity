@@ -263,18 +263,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d791312cafcc64087b3ab88bb12445fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapPrefabs:
-  - {fileID: 673869505840259115, guid: c8dcde2922ddc45b5b04426520ab00a3, type: 3}
-  - {fileID: 3794582661798756135, guid: f5fc35b4c5adb40a0b67ba4aa85c40ec, type: 3}
-  - {fileID: 8100748423684887817, guid: caeee06603f8542ebaedb168f8a3c1bb, type: 3}
-  - {fileID: 673869505840259115, guid: d2b655305d6f144a683fa904481f75a3, type: 3}
   goalObject: {fileID: 673869505840259115, guid: 05de4674ad6d346a1aed8dfb55093c18, type: 3}
-  testMapPrefabs:
-  - {fileID: 8100748423684887817, guid: 78d81b3edf33643158e4cfd932f8da1c, type: 3}
-  - {fileID: 673869505840259115, guid: d2b655305d6f144a683fa904481f75a3, type: 3}
-  - {fileID: 3794582661798756135, guid: d01d2c88365a246c4ace259d973f906f, type: 3}
-  - {fileID: 8100748423684887817, guid: caeee06603f8542ebaedb168f8a3c1bb, type: 3}
-  - {fileID: 673869505840259115, guid: 05de4674ad6d346a1aed8dfb55093c18, type: 3}
+  stages:
+  - {fileID: 11400000, guid: 69b001ace8bb84897a5875f87a29abc9, type: 2}
+  - {fileID: 11400000, guid: 563c4971784754b5fb972dbfd3f44616, type: 2}
 --- !u!4 &295074474
 Transform:
   m_ObjectHideFlags: 0
