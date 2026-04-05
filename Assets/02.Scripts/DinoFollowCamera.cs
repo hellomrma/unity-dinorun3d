@@ -36,8 +36,4 @@ public class DinoFollowCamera : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-
-    }
 }

@@ -1,6 +1,7 @@
 ﻿using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// 공룡(Dino) 캐릭터의 이동을 제어하는 컴포넌트.
@@ -79,7 +80,9 @@ public class DinoController : MonoBehaviour
             {
                 // 골 지점에 도달한 경우, 게임 종료 또는 다음 단계로 이동하는 로직을 여기에 추가할 수 있습니다.
                 Debug.Log("Goal reached!");
+                PlayerPrefs.SetInt("Stage", MapManager.instance.GetStage() + 1); // 다음 스테이지로 저장
                 doors.gameObject.GetComponent<BoxCollider>().enabled = false; // 골 지점의 BoxCollider를 비활성화하여 중복 감지 방지
+                SceneManager.LoadScene(0); // 타이틀 씬으로 이동 (게임 종료 처리)
             } else
             {
                 int doorNum = doors.gameObject.GetComponent<SelectDoors>().GetDoorNumber(transform.position.x);

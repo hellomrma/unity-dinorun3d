@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 /// <summary>
 /// 게임 전체 상태를 관리하는 싱글톤 컴포넌트.
@@ -22,10 +23,16 @@ public class GameManager : MonoBehaviour
     /// <summary>게임 시작 전 표시되는 타이틀 패널 UI</summary>
     public GameObject titlePanel;
 
+    /// <summary>게임 플레이 중 표시되는 게임 패널 UI</summary>
     public GameObject gamePanel;
 
     /// <summary>목표 지점까지의 진행도를 표시하는 슬라이더 UI</summary>
     public Slider progressBar;
+
+    /// <summary>현재 스테이지 번호를 표시하는 텍스트 UI</summary>
+    public TextMeshProUGUI nowStageText;
+    /// <summary>다음 스테이지 번호를 표시하는 텍스트 UI</summary>
+    public TextMeshProUGUI nextStageText;
 
     /// <summary>
     /// 싱글톤 초기화. 이미 인스턴스가 존재하면 현재 오브젝트를 파괴하고,
@@ -49,6 +56,9 @@ public class GameManager : MonoBehaviour
         progressBar.value = 0f; // 진행도 바 초기화
         titlePanel.SetActive(true);
         gamePanel.SetActive(false);
+
+        nowStageText.text = MapManager.instance.GetStage().ToString();
+        nextStageText.text = (MapManager.instance.GetStage() + 1).ToString();
     }
 
     /// <summary>

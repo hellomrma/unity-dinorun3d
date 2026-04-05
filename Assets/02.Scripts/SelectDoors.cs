@@ -4,13 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-/// <summary>
-/// 선택 문(좌/우)의 타입과 숫자를 관리하는 컴포넌트.
-/// 문에 표시되는 연산 타입(Plus/Minus)과 수치를 설정하고,
-/// 정답/오답 여부에 따라 색상을 변경한다.
-/// </summary>
-
-/// <summary>문의 연산 타입: Plus(더하기) 또는 Minus(빼기)</summary>
+/// <summary>문의 연산 타입: Plus(더하기), Minus(빼기), Times(곱하기), Division(나누기)</summary>
 public enum DoorType
 {
     Plus,
@@ -19,30 +13,44 @@ public enum DoorType
     Division
 }
 
+/// <summary>
+/// 선택 문(좌/우)의 연산 타입과 숫자를 관리하는 컴포넌트.
+/// 문에 표시되는 연산 기호와 수치를 설정하고, 정답/오답 여부에 따라 색상을 변경합니다.
+/// </summary>
 public class SelectDoors : MonoBehaviour
 {
-
-
-    // 오른쪽/왼쪽 문의 스프라이트 렌더러 (색상 변경에 사용)
+    /// <summary>오른쪽 문의 스프라이트 렌더러 (색상 변경에 사용)</summary>
     public SpriteRenderer rightDoorSpriteRD;
+    /// <summary>왼쪽 문의 스프라이트 렌더러 (색상 변경에 사용)</summary>
     public SpriteRenderer leftDoorSpriteRD;
 
-    // 오른쪽/왼쪽 문에 표시되는 텍스트 (연산 타입 + 숫자)
+    /// <summary>오른쪽 문에 표시되는 텍스트 (연산 기호 + 숫자)</summary>
     public TextMeshPro rightDoorText;
+    /// <summary>왼쪽 문에 표시되는 텍스트 (연산 기호 + 숫자)</summary>
     public TextMeshPro leftDoorText;
 
-    // [SerializeField]: private 변수임에도 Unity 인스펙터 창에서 값을 직접 편집할 수 있게 해주는 어트리뷰트.
-    // private으로 캡슐화를 유지하면서도 에디터에서 손쉽게 설정할 수 있어, public으로 노출하는 것보다 안전하다.
+    /// <summary>
+    /// 오른쪽 문의 연산 타입.
+    /// [SerializeField]로 캡슐화를 유지하면서 인스펙터에서 편집 가능하도록 설정합니다.
+    /// </summary>
     [SerializeField]
-    private DoorType rightDoorType; // 오른쪽 문의 연산 타입
-    public int rightDoorNumber;     // 오른쪽 문에 표시될 숫자
+    private DoorType rightDoorType;
+    /// <summary>오른쪽 문에 표시될 피연산자 숫자</summary>
+    public int rightDoorNumber;
 
+    /// <summary>
+    /// 왼쪽 문의 연산 타입.
+    /// [SerializeField]로 캡슐화를 유지하면서 인스펙터에서 편집 가능하도록 설정합니다.
+    /// </summary>
     [SerializeField]
-    private DoorType leftDoorType;  // 왼쪽 문의 연산 타입
-    public int leftDoorNumber;      // 왼쪽 문에 표시될 숫자
+    private DoorType leftDoorType;
+    /// <summary>왼쪽 문에 표시될 피연산자 숫자</summary>
+    public int leftDoorNumber;
 
-    public Color goodColor; // 정답 문에 적용할 색상
-    public Color badColor;  // 오답 문에 적용할 색상
+    /// <summary>정답 문에 적용할 색상</summary>
+    public Color goodColor;
+    /// <summary>오답 문에 적용할 색상</summary>
+    public Color badColor;
 
     void Start()
     {
