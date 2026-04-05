@@ -53,14 +53,15 @@ public class Enermy : MonoBehaviour
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, detectRadius);
         foreach (Collider colls in hitColliders)
         {
-            if (colls.gameObject.GetComponent<Raptor>() != null) {}
+            // TryGetComponent: 컴포넌트가 없을 때 allocation 없이 건너뜀
+            if (!colls.gameObject.TryGetComponent(out Raptor raptor)) continue;
             {
                 // 이미 다른 적이 추격 중인 랩터는 건너뜀
-                if (colls.gameObject.GetComponent<Raptor>().IsTarget())
+                if (raptor.IsTarget())
                     continue;
 
                 // 타겟 지정 후 추격 시작
-                colls.gameObject.GetComponent<Raptor>().SetTarget();
+                raptor.SetTarget();
                 targetRaptor = colls.gameObject.transform;
                 StartGotoDino();
             }
