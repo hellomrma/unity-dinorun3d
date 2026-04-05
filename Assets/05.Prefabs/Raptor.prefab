@@ -3581,6 +3581,8 @@ GameObject:
   - component: {fileID: 8805719914790033441}
   - component: {fileID: 2490861597597743066}
   - component: {fileID: 6812525692460403301}
+  - component: {fileID: -2584590401599683160}
+  - component: {fileID: -5817697827509575386}
   m_Layer: 0
   m_Name: Raptor
   m_TagString: Untagged
@@ -3763,6 +3765,39 @@ MonoBehaviour:
   deathClips:
   - {fileID: 8300000, guid: 399d4fa3cddfd664cb117049933b2554, type: 3}
   - {fileID: 8300000, guid: 655ae2339de0ea14c8adefdcb28e2ffa, type: 3}
+--- !u!114 &-2584590401599683160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8133713061342582458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 461071f23cb234afbb7a1b56b807f054, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!135 &-5817697827509575386
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8133713061342582458}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &8280206152436460220
 GameObject:
   m_ObjectHideFlags: 0
