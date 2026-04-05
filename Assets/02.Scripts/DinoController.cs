@@ -83,7 +83,7 @@ public class DinoController : MonoBehaviour
                 PlayerPrefs.SetInt("Stage", MapManager.instance.GetStage() + 1); // 다음 스테이지로 저장
                 doors.gameObject.GetComponent<BoxCollider>().enabled = false; // 골 지점의 BoxCollider를 비활성화하여 중복 감지 방지
                 SceneManager.LoadScene(0); // 타이틀 씬으로 이동 (게임 종료 처리)
-            } else
+            } else if (doors.gameObject.GetComponent<SelectDoors>() != null)
             {
                 int doorNum = doors.gameObject.GetComponent<SelectDoors>().GetDoorNumber(transform.position.x);
                 DoorType doorType = doors.gameObject.GetComponent<SelectDoors>().GetDoorType(transform.position.x);
