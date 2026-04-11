@@ -3394,6 +3394,7 @@ GameObject:
   - component: {fileID: 4969388892278520252}
   - component: {fileID: 7874600597632456465}
   - component: {fileID: 6589983213486671258}
+  - component: {fileID: 7763464971188284715}
   m_Layer: 0
   m_Name: EnermyRaptor
   m_TagString: Untagged
@@ -3588,6 +3589,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48df1c2c3c0954a7e85bad526f788d47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 13
+  detectRadius: 13
+  isTargetOn: 0
+--- !u!114 &7763464971188284715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7471515663415986714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af8ce05e36583114e8687584d8f76d3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enermyRaptorPrefab: {fileID: 0}
+  enermyRaptorNumber: 0
+  enermyRaptorsParent: {fileID: 0}
+  initialRadius: 0
+  radiusGrowth: 0.12
+  angleIncrement: 137.5
 --- !u!1 &7485642784341902543
 GameObject:
   m_ObjectHideFlags: 0

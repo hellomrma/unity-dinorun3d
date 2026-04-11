@@ -45,7 +45,18 @@ public class DinoPositionController : MonoBehaviour
     /// <summary>게임 시작 시 초기 랩터 위치를 설정합니다.</summary>
     void Start()
     {
+        // SetDinoPosition();
+    }
+
+    void Update()
+    {
+        if (GameManager.instance.isGameStart.Equals(false)) // 게임 시작이 안됐으면 리턴
+        return;
         SetDinoPosition();
+        if(raptors.childCount<= 0)  // Raptor가 0보다 작거나 같다면
+        {
+        GameManager.instance.GameOver();
+        }
     }
 
     /// <summary>

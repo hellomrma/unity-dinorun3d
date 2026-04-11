@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// 게임 전체 상태를 관리하는 싱글톤 컴포넌트.
@@ -25,6 +26,8 @@ public class GameManager : MonoBehaviour
 
     /// <summary>게임 플레이 중 표시되는 게임 패널 UI</summary>
     public GameObject gamePanel;
+    public GameObject gameOverPanel;
+    public GameObject clearPanel;
 
     /// <summary>목표 지점까지의 진행도를 표시하는 슬라이더 UI</summary>
     public Slider progressBar;
@@ -52,10 +55,15 @@ public class GameManager : MonoBehaviour
     /// <summary>게임 시작 시 Time.timeScale을 0으로 설정하여 타이틀 화면에서 일시 정지 상태를 유지합니다.</summary>
     public void Start()
     {
+
+        // PlayerPrefs.DeleteAll(); // PlayerPrefs 초기화 (테스트용, 실제 배포 시에는 제거해야 함)
+
         Time.timeScale = 0f;
         progressBar.value = 0f; // 진행도 바 초기화
         titlePanel.SetActive(true);
         gamePanel.SetActive(false);
+        gameOverPanel.SetActive(false);
+        clearPanel.SetActive(false);
 
         nowStageText.text = MapManager.instance.GetStage().ToString();
         nextStageText.text = (MapManager.instance.GetStage() + 1).ToString();
@@ -90,6 +98,29 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         SetDistanceProgressBar();
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(0); // 타이틀 씬으로 이동 (게임 종료 처리)
+    }
+
+    public void GameOver()
+    {
+        SoundManager.instance.GameOverSoundPlay();
+        isGameStart = false;
+        Time.timeScale = 0f;  // 게임 전체 시간을 멈춤
+        gamePanel.SetActive(false);
+        gameOverPanel.SetActive(true);
+    }
+
+    public void StageClear()
+    {
+        SoundManager.instance.GameClearSoundPlay();
+        isGameStart = false;
+        Time.timeScale = 0f;  // 게임 전체 시간을 멈춤
+        gamePanel.SetActive(false);
+        clearPanel.SetActive(true);
     }
 
 }

@@ -19,5 +19,9 @@ public class DinoCounter : MonoBehaviour
     void Update()
     {
         dinoCountText.text = dinoParent.childCount.ToString();
+        if(dinoParent.childCount<=0)    // 현재 raptor들이 0보다 작거나 같게 되면
+        {
+        this.gameObject.SetActive(false);  // Text 표시를 꺼줍니다.
+        }
     }
 }
